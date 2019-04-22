@@ -1,17 +1,21 @@
 {
   "defaultSeverity": "warning",
-  "extends": [
-    "tslint:recommended"
-  ],
+  "extends": ["tslint:recommended"],
   "linterOptions": {
-    "exclude": [
-      "node_modules/**"
-    ]
+    "exclude": ["node_modules/**", "tests/**"]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
   },
   "rules": {
+    "no-shadowed-variable": false,
+    "align": [false, "parameters", "statements"],
+    "whitespace": [false, "check-branch", "check-operator", "check-typecast"],
+    "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
+    "semicolon": [false, "never"],
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
-    "interface-name": false,
+    "interface-name": true,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false
