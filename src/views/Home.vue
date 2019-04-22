@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <Upload class="col-6" msg="Welcome to Your Vue.js + TypeScript App"/>
-    <div class="col-6">
+    <Upload class="col-lg-6" msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div class="col-lg-6">
       <Result :data="gumiResult" msg="Gumi Vietnam" class="result-card"/>
-      <Result :data="googleResult" msg="Gooogle" class="result-card"/>
+      <Result :data="googleResult" msg="Google" class="result-card"/>
       <Result :data="microsoftResult" msg="Microsoft" class="result-card"/>
     </div>
   </div>
@@ -13,15 +13,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Upload from '@/components/Upload.vue'
 import Result from '@/components/Result.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 @Component({
   components: {
     Upload,
     Result,
-  },
-  methods: {
-    ...mapActions(['fetchGumiApi', 'fetchGoogleApi', 'fetchMicrosoftApi']),
   },
   computed: {
     ...mapGetters(['gumiResult', 'googleResult', 'microsoftResult']),
