@@ -1,17 +1,15 @@
 import axios from 'axios'
 
-declare global {
-  interface IResult {
-    gumiResult: string
-    googleResult: string
-    microsoftResult: string
-  }
+interface IResult {
+  gumiResult: string
+  googleResult: string
+  microsoftResult: string
 }
 
 const state: IResult = {
-  gumiResult: '',
-  googleResult: '',
-  microsoftResult: '',
+  gumiResult: 'No test was performed',
+  googleResult: 'No test was performed',
+  microsoftResult: 'No test was performed',
 }
 
 const getters = {
