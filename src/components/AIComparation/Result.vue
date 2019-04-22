@@ -2,8 +2,12 @@
   <div class="container-fluid">
     <div class="card">
       <div class="card-details">
-        <h2 class="card-head">{{msg}}</h2>
-        <p>{{data}}</p>
+        <h1 class="card-head">
+          <small class="text-muted">{{msg}}</small>
+        </h1>
+        <h3>
+          <small class="text-muted">{{data}}</small>
+        </h3>
       </div>
     </div>
   </div>
@@ -26,6 +30,10 @@ export default class Result extends Vue {
   display: table;
 }
 
+h1 .text-muted {
+  color: #d3394c !important;
+  font-weight: bold;
+}
 .clearfix:after {
   clear: both;
 }

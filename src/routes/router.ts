@@ -1,4 +1,4 @@
-import { homeRouter } from './home'
+import { aiComparationRouter } from './ai-comparation'
 import { aboutRouter } from './about'
 
-export const routers = [homeRouter, aboutRouter]
+export const routers = [aiComparationRouter, aboutRouter]

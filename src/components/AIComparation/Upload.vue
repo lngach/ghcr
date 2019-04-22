@@ -36,10 +36,8 @@ import { mapActions, mapGetters } from 'vuex'
   },
 })
 export default class Upload extends Vue {
-  public callAPi(file: string) {
-    ;(this as any).fetchGumiApi(file)
-    ;(this as any).fetchGoogleApi(file)
-    ;(this as any).fetchMicrosoftApi(file)
+  public callAPi(blob: Blob) {
+    ;(this as any).fetchMicrosoftApi(blob)
   }
 
   private onDrop(e: any) {
@@ -47,12 +45,10 @@ export default class Upload extends Vue {
     e.preventDefault()
     const files = e.dataTransfer.files
     this.createFile(files[0])
-    this.callAPi((this as any).imageData)
   }
   private onChange(e: any) {
     const files = e.target.files
     this.createFile(files[0])
-    this.callAPi((this as any).imageData)
   }
 
   private createFile(file: File) {
@@ -63,8 +59,21 @@ export default class Upload extends Vue {
     const img = new Image()
     const reader = new FileReader()
     const vm = this
-    reader.onload = (e: any) => {
-      ;(vm as any).$store.commit('setImageData', e.target.result)
+    reader.onload = async (e: any) => {
+      const base64Data = e.target.result
+      const validDataUrl = base64Data.replace(
+        /^data:image\/(png|jpeg|jpg);base64,/,
+        ''
+      )
+      const byteCharacters = atob(validDataUrl)
+      const byteNumbers = new Array(byteCharacters.length)
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i)
+      }
+      const byteArray = new Uint8Array(byteNumbers)
+      const blob = new Blob([byteArray], { type: 'application/octet-stream' })
+      await (vm as any).$store.commit('setImageData', e.target.result)
+      await (vm as any).callAPi(blob)
     }
     reader.readAsDataURL(file)
   }
